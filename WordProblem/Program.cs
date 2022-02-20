@@ -39,7 +39,7 @@ namespace Reduction
             Console.ReadLine();
         }
 
-        public static bool IsAReduction(List<char> list, int i)
+        private static bool IsAReduction(List<char> list, int i)
         {
             var pair = list[i].ToString() + list[i + 1].ToString();
             if (pair == "aA" ||
@@ -57,18 +57,14 @@ namespace Reduction
 
         private static bool WordIsCorrect(char[] charArray)
         {
-            var a = "a";
-            var A = "A";
-            var b = "b";
-            var B = "B";
 
             foreach (var c in charArray)
             {
                 var stringChar = c.ToString();
-                if (stringChar != a &&
-                    stringChar != A &&
-                    stringChar != b &&
-                    stringChar != B)
+                if (stringChar != "a" &&
+                    stringChar != "A" &&
+                    stringChar != "b" &&
+                    stringChar != "B")
                 {
                     return false;
                 }
