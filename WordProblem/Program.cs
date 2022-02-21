@@ -5,6 +5,8 @@ namespace Reduction
     {
         static void Main(string[] args)
         {
+            //Программа має рахувати кількість редукцій у набраному слові,
+            //що може скаладатися з літер a, A, b, та B
             Console.WriteLine("If element a has inverse A and element b has inverse B");
             Console.WriteLine("enter a word which can consist of letters a, A, b, B");
             Console.WriteLine("For example: AaBb");
