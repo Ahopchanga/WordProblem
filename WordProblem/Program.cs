@@ -11,23 +11,31 @@ namespace Reduction
             var word = Console.ReadLine();
             var array = word.ToCharArray();
 
-            while (!WordIsCorrect(array))
-            {
-                Console.WriteLine("Error! You entered invalid word. Try again.");
-                word = Console.ReadLine();
-                array = word.ToCharArray();
-            }
-
             List<char> list = new List<char>(array);
             var count = 0;
 
-            //Для кожної літери, починаючи з першої
+            //Для кожної літери слова, починаючи з першої
             for (int i = 0; i < list.Count; i++)
             {
-                //Якщо наступна літера після даної є її інверсією
-                if (IsAReduction(list, i))
+                var indicator = false;
+
+                //Визначаємо конкатенацію цієї літери із наступною
+                var pair = list[i].ToString() + list[i + 1].ToString();
+
+                //Якщо конкатенація дає aA, Aa, bB або Bb
+                if (pair == "aA" ||
+                    pair == "Aa" ||
+                    pair == "bB" ||
+                    pair == "Bb")
                 {
-                    //То маємо редукцію, записуємо це у змінну count 
+                    //Сповіщаємо про це змінну indicator
+                    indicator =  true;
+                }
+
+                //Якщо індикатор має значення true
+                if (indicator)
+                {
+                    //То маємо редукцію, додаємо одиничку до змінної count, тобто записуємо, що отримали одну редукцію
                     count++;
 
                     //та рухаємося не до наступної правої літери, а через одну
@@ -37,40 +45,6 @@ namespace Reduction
 
             Console.WriteLine($"Amount of reductions is {count}");
             Console.ReadLine();
-        }
-
-        private static bool IsAReduction(List<char> list, int i)
-        {
-            var pair = list[i].ToString() + list[i + 1].ToString();
-            if (pair == "aA" ||
-                pair == "Aa" ||
-                pair == "bB" ||
-                pair == "Bb")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private static bool WordIsCorrect(char[] charArray)
-        {
-
-            foreach (var c in charArray)
-            {
-                var stringChar = c.ToString();
-                if (stringChar != "a" &&
-                    stringChar != "A" &&
-                    stringChar != "b" &&
-                    stringChar != "B")
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }
